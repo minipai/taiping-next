@@ -1,6 +1,13 @@
 import '../styles/globals.css'
 import '../styles/layout.css'
-// import '../styles/bootstrap.min.css'
+
+if (typeof window !== 'undefined' && 'serviceWorker' in window.navigator) {
+  caches.keys().then(function (cacheNames) {
+    cacheNames.forEach(function (cacheName) {
+      caches.delete(cacheName)
+    })
+  })
+}
 
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />
