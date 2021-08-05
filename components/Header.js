@@ -21,8 +21,10 @@ const Header = (props) => {
       <div className="header-inner header-fixed">
         <div className="container">
           <div className="logo">
-            <Link href="/">
-              <Img src={data.logo.url} alt="Logo" width={150} height={50} />
+            <Link href="/" passHref>
+              <a>
+                <Img src={data.logo.url} alt="Logo" width={150} height={50} />
+              </a>
             </Link>
           </div>
           <Toggle>
