@@ -12,17 +12,10 @@ export default function Artists(props) {
   return (
     <BlogGrid title="文環夜學" data={homepage}>
       {artists.map((artist, index) => (
-        <div key={index} className={css.videoBlock}>
-          <RichText render={artist.primary.title} />
-          <RichText render={artist.primary.description} />
-          {artist.fields.map((field, index) => (
-            <div
-              key={index}
-              dangerouslySetInnerHTML={{
-                __html: field.video_src.html,
-              }}
-            />
-          ))}
+        <div key={index} className={css.gridBlock}>
+          <RichText render={artist.title} />
+          <RichText render={artist.file} />
+          {artist.name && <img src={artist.name.url} alt={artist.name.alt} />}
         </div>
       ))}
     </BlogGrid>
@@ -36,21 +29,9 @@ export async function getStaticProps() {
         allArtists {
           edges {
             node {
-              body {
-                __typename
-                ... on ArtistBodyVideo_highlights {
-                  type
-                  label
-                  primary {
-                    title
-                    description
-                  }
-                  fields {
-                    video_src
-                    video_title
-                  }
-                }
-              }
+              name
+              title
+              file
             }
           }
         }
@@ -63,9 +44,7 @@ export async function getStaticProps() {
     props: {
       data: {
         homepage,
-        artists: data.allArtists.edges
-          .map((edge) => edge.node.body?.[0])
-          .filter((_) => _),
+        artists: data.allArtists.edges.map((edge) => edge.node),
       },
     },
   }

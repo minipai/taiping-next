@@ -1,9 +1,8 @@
-.videoBlock {
-  width: 50%;
+.gridBlock {
+  width: 33%;
   padding: 1rem;
 }
 
-.videoBlock iframe {
-  width: 500px;
-  height: 300px;
+.gridBlock > h1 {
+  font-size: 1.5rem;
 }
